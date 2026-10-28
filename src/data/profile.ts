@@ -40,7 +40,7 @@ export const profile = {
     email: 'mkbaee@gmail.com',
     phone: '+63 915 019 2618',
     phoneHref: 'tel:+639150192618',
-    linkedin: 'https://www.linkedin.com/in/mark-klent-bayucot-b7ab54419/',
+    linkedin: 'https://www.linkedin.com/in/mark-klent-bayucot-6a119528b/',
     onlinejobs: 'https://www.onlinejobs.ph/jobseekers/info/3453959',
     github: 'https://github.com/mkbaee-ops' as string | null,
     resume: '/Mark-Klent-Bayucot-Resume.pdf' as string | null, // file lives in /public
