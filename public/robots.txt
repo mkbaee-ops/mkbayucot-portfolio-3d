@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
 
-# PLACEHOLDER: update the domain once deployed
-Sitemap: https://mkbayucot.vercel.app/sitemap.xml
+Sitemap: https://mkbayucot-portfolio-3d.vercel.app/sitemap.xml

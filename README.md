@@ -22,7 +22,7 @@ Requires Node 20+.
    gh repo create mkbayucot-portfolio-3d --public --source=. --push
    ```
 2. On [vercel.com/new](https://vercel.com/new), import the repo. Vercel auto-detects Vite (build `npm run build`, output `dist`), so you don't need to change anything.
-3. In **Project → Settings → Environment Variables**, set `VITE_SITE_URL` to your real domain (e.g. `https://mkbayucot.vercel.app`, no trailing slash), then redeploy. This fills the canonical URL and the absolute Open Graph image URLs.
+3. In **Project → Settings → Environment Variables**, set `VITE_SITE_URL` to your real domain (e.g. `https://mkbayucot-portfolio-3d.vercel.app`, no trailing slash), then redeploy. This fills the canonical URL and the absolute Open Graph image URLs.
 4. Update the domain in `public/robots.txt` and `public/sitemap.xml` too.
 
 Every push to `main` redeploys automatically.

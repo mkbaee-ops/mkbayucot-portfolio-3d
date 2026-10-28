@@ -1,6 +1,14 @@
 // Personal info. Sourced from https://mkbayucot.lovable.app.
 // Anything set to `null` is a PLACEHOLDER: the UI shows it as "add me" until you fill it in.
 
+import { projects } from './projects'
+
+// Counted from projects.ts so the numbers stay true as you add projects (placeholders excluded).
+export const counts = {
+  automations: projects.filter((p) => p.category === 'automation' && !p.placeholder).length,
+  webApps: projects.filter((p) => p.category === 'web' && !p.placeholder).length,
+}
+
 export const profile = {
   name: 'Mark Klent Bayucot',
   firstName: 'Mark Klent',
@@ -14,16 +22,17 @@ export const profile = {
   tagline:
     'I build AI systems that run real operations: n8n, Zapier & Make automations, plus full-stack web apps shipped with Claude Code, Supabase & Vercel.',
 
-  // Bio, verbatim from the current portfolio
-  bio: "I'm an AI Automations Specialist building intelligent workflows that replace manual ops with systems that scale. I design end-to-end automations across GoHighLevel, n8n and Zapier — from lead capture and CRM nurture to AI-powered content pipelines and multi-channel sequences. 30+ live workflows shipped, 99% uptime, and every build documented so clients can self-manage.",
+  // Bio from the current portfolio; the shipped count comes from projects.ts
+  bio: `I'm an AI Automations Specialist building intelligent workflows that replace manual ops with systems that scale. I design end-to-end automations across GoHighLevel, n8n and Zapier — from lead capture and CRM nurture to AI-powered content pipelines and multi-channel sequences. ${counts.automations} automation projects and ${counts.webApps} web apps shipped, 99% uptime, and every build documented so clients can self-manage.`,
 
   nowBuilding:
     'Next step: AI Engineer. Alongside automation work I now build landing pages and full-stack web apps with Claude Code, GitHub, Supabase and Vercel, taking the same systems thinking from no-code workflows into production code.',
 
   stats: [
-    { value: '30+', label: 'Live workflows shipped' },
+    { value: String(counts.automations), label: 'Automation projects shipped' },
+    { value: String(counts.webApps), label: 'Web apps shipped' },
     { value: '99%', label: 'Automation uptime' },
-    { value: '20+ hrs', label: 'Manual work removed weekly' },
+    { value: '20+h', label: 'Manual work removed weekly' },
     { value: '15%', label: 'Avg. lift in click-through & response' },
   ],
 
@@ -33,8 +42,8 @@ export const profile = {
     phoneHref: 'tel:+639150192618',
     linkedin: 'https://www.linkedin.com/in/mark-klent-bayucot-b7ab54419/',
     onlinejobs: 'https://www.onlinejobs.ph/jobseekers/info/3453959',
-    github: null as string | null, // PLACEHOLDER: e.g. 'https://github.com/your-username'
-    resume: null as string | null, // PLACEHOLDER: drop a PDF in /public and set e.g. '/Mark-Klent-Bayucot-Resume.pdf'
+    github: 'https://github.com/mkbaee-ops' as string | null,
+    resume: '/Mark-Klent-Bayucot-Resume.pdf' as string | null, // file lives in /public
   },
 }
 
@@ -73,7 +82,7 @@ export const experience = [
     period: '2025 — Present',
     location: 'Remote',
     highlights: [
-      'Built and maintained 30+ multi-step Zapier workflows across CRMs, email platforms, and data tools — eliminating 20+ hours/week of manual follow-up.',
+      'Built and maintained multi-step Zapier workflows across CRMs, email platforms, and data tools — eliminating 20+ hours/week of manual follow-up.',
       'Designed and connected lead capture funnels to automated Zap sequences, averaging a 15% lift in click-through and response rates.',
       'Integrated platforms including GoHighLevel, Google Sheets, and Airtable using Zapier, webhooks, and custom API steps — replacing fragile manual hand-offs with reliable, real-time data syncs.',
       'Diagnosed and rebuilt broken Zaps, misconfigured triggers, and failed filters — maintaining 99% automation uptime across client stacks.',

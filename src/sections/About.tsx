@@ -40,11 +40,11 @@ export function About() {
           </Reveal>
 
           <Reveal delay={0.1}>
-            <dl className="mt-10 grid grid-cols-2 gap-3 md:grid-cols-4">
+            <dl className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 xl:grid-cols-5">
               {profile.stats.map((s) => (
-                <div key={s.label} className="glass rounded-2xl p-4">
-                  <dt className="text-xs leading-snug text-muted">{s.label}</dt>
-                  <dd className="mt-2 font-display text-3xl font-semibold text-gradient">{s.value}</dd>
+                <div key={s.label} className="glass flex flex-col-reverse justify-end rounded-2xl p-4">
+                  <dt className="mt-1 text-xs leading-snug text-muted">{s.label}</dt>
+                  <dd className="whitespace-nowrap font-display text-3xl font-semibold text-gradient">{s.value}</dd>
                 </div>
               ))}
             </dl>

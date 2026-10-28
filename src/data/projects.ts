@@ -296,15 +296,17 @@ export const projects: Project[] = [
     placeholder: true,
   },
   {
-    id: 'placeholder-fullstack-app',
-    title: 'Your full-stack app',
+    id: 'lmbp-talent-app',
+    title: 'LMBP Talent App',
     category: 'web',
-    platform: 'Web app',
-    description: 'PLACEHOLDER: add a full-stack app (e.g. Claude Code + Supabase + Vercel) with live and GitHub links.',
-    tools: ['Claude Code', 'Supabase', 'GitHub', 'Vercel'],
-    liveLink: null,
-    githubLink: null,
-    placeholder: true,
+    platform: 'Full-stack web app',
+    description:
+      'Website and client portal for LMBP, a remote communication-team agency. Clients sign in to browse their team profiles, shortlist people and request interviews; the LMBP team uses the same login for its workspace.',
+    tools: ['Claude Code', 'Next.js', 'Supabase', 'GitHub', 'Vercel'],
+    image: '/images/projects/lmbp-talent-app.webp',
+    imageAlt: 'LMBP homepage: "Systems first. Then scale." headline beside the LMBP Team logo',
+    liveLink: 'https://lmbp-talent-app.vercel.app/',
+    githubLink: null, // PLACEHOLDER
   },
 ]
 

@@ -1,11 +1,7 @@
 import { motion } from 'framer-motion'
-import { profile } from '../data/profile'
-import { automationProjects } from '../data/projects'
+import { counts, profile } from '../data/profile'
 
-const proof = [
-  `${automationProjects.length} shipped case studies`,
-  ...profile.stats.slice(0, 2).map((s) => `${s.value} ${s.label.toLowerCase()}`),
-]
+const proof = [`${counts.automations} automation projects`, `${counts.webApps} web apps shipped`, '99% automation uptime']
 
 const fade = (delay: number) => ({
   initial: { opacity: 0, y: 16 },
