@@ -75,30 +75,83 @@ export const services = [
   },
 ]
 
-export const experience = [
+export type Experience = {
+  role: string
+  company: string
+  period: string
+  location: string
+  summary?: string
+  /** Headline outcomes shown as stat tiles */
+  metrics?: { value: string; label: string }[]
+  /** `lead` is the bold lead-in; `href` adds a "See it" link (e.g. to a section on this page) */
+  highlights: { lead: string; text: string; href?: string }[]
+  tools?: string[]
+}
+
+// Sourced from the resume and the current portfolio.
+export const experience: Experience[] = [
   {
-    role: 'AI Automations Specialist',
+    role: 'AI Automation Specialist & AI App Builder',
     company: 'Freelance',
     period: '2025 — Present',
     location: 'Remote',
-    highlights: [
-      'Built and maintained multi-step Zapier workflows across CRMs, email platforms, and data tools — eliminating 20+ hours/week of manual follow-up.',
-      'Designed and connected lead capture funnels to automated Zap sequences, averaging a 15% lift in click-through and response rates.',
-      'Integrated platforms including GoHighLevel, Google Sheets, and Airtable using Zapier, webhooks, and custom API steps — replacing fragile manual hand-offs with reliable, real-time data syncs.',
-      'Diagnosed and rebuilt broken Zaps, misconfigured triggers, and failed filters — maintaining 99% automation uptime across client stacks.',
-      'Documented all workflows with step-by-step Zap maps and trained clients to self-manage, add branches, and troubleshoot independently.',
+    summary:
+      'I own client projects end to end, from discovery and process mapping through build, testing, deployment, documentation and training, for marketing agencies, staffing agencies, e-commerce and service businesses.',
+    metrics: [
+      { value: '20+h', label: 'Manual work removed weekly' },
+      { value: '99%', label: 'Uptime across client stacks' },
+      { value: '15%', label: 'Avg. lift in click-through & response' },
+      { value: String(counts.automations + counts.webApps), label: 'Documented builds in this portfolio' },
     ],
+    highlights: [
+      {
+        lead: 'AI systems in code',
+        text: 'Engineered a lead research engine in Claude Code and Python that finds, researches and scores companies with source-linked evidence, enriching only top-priority leads to cut spend on paid enrichment APIs.',
+        href: '#automations',
+      },
+      {
+        lead: 'Full-stack web apps',
+        text: 'Ship landing pages and full-stack apps with Claude Code, GitHub, Supabase and Vercel, including a client portal where staffing clients browse talent profiles, shortlist candidates and request interviews.',
+        href: '#web',
+      },
+      {
+        lead: 'Automation at scale',
+        text: 'Build and maintain multi-step workflows in Zapier, n8n and Make across CRMs, email platforms and data tools, eliminating 20+ hours a week of manual follow-up.',
+        href: '#automations',
+      },
+      {
+        lead: 'Integrations & APIs',
+        text: 'Connect GoHighLevel, Google Sheets and Airtable through webhooks and custom API steps, replacing fragile manual hand-offs with real-time data sync.',
+      },
+      {
+        lead: 'Funnels that convert',
+        text: 'Designed lead capture funnels with automated sequences, lifting click-through and response rates by an average of 15%.',
+      },
+      {
+        lead: 'Reliability & handover',
+        text: 'Diagnose and rebuild broken workflows, triggers and filters to hold 99% uptime, then document every build with step-by-step maps and train clients to self-manage.',
+      },
+    ],
+    tools: ['Claude Code', 'Zapier', 'n8n', 'Make', 'GitHub', 'Supabase', 'Vercel', 'OpenAI', 'Groq', 'GoHighLevel', 'Google Sheets', 'Airtable'],
   },
-  // From the resume
   {
     role: 'Secretariat Staff',
     company: 'One Stop Shop Secretariat, Mactan-Cebu International Airport Authority',
     period: '2022 — 2024',
     location: 'Cebu, Philippines',
     highlights: [
-      'Coordinated scheduling and document routing for OSS operations, keeping daily office workflow moving without bottlenecks.',
-      'Served as primary liaison between the secretariat and multiple on-site government and corporate partner agencies, resolving cross-agency requests.',
-      'Prepared meeting minutes, reports, and data records to keep operations audit-ready; guided walk-in applicants through processing requirements, reducing repeat visits.',
+      {
+        lead: 'Operations flow',
+        text: 'Coordinated scheduling and document routing for OSS operations, keeping daily office workflow moving without bottlenecks.',
+      },
+      {
+        lead: 'Cross-agency liaison',
+        text: 'Primary liaison between the secretariat and multiple on-site government and corporate partner agencies, resolving cross-agency requests.',
+      },
+      {
+        lead: 'Audit-ready records',
+        text: 'Prepared meeting minutes, reports and data records to keep operations audit-ready; guided walk-in applicants through requirements, reducing repeat visits.',
+      },
     ],
   },
 ]
