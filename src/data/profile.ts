@@ -89,6 +89,18 @@ export const experience = [
       'Documented all workflows with step-by-step Zap maps and trained clients to self-manage, add branches, and troubleshoot independently.',
     ],
   },
+  // From the resume
+  {
+    role: 'Secretariat Staff',
+    company: 'One Stop Shop Secretariat, Mactan-Cebu International Airport Authority',
+    period: '2022 — 2024',
+    location: 'Cebu, Philippines',
+    highlights: [
+      'Coordinated scheduling and document routing for OSS operations, keeping daily office workflow moving without bottlenecks.',
+      'Served as primary liaison between the secretariat and multiple on-site government and corporate partner agencies, resolving cross-agency requests.',
+      'Prepared meeting minutes, reports, and data records to keep operations audit-ready; guided walk-in applicants through processing requirements, reducing repeat visits.',
+    ],
+  },
 ]
 
 // Tech stack. `icon` points to a file in /public/icons (Simple Icons, CC0); omit it to show a monogram.

@@ -52,7 +52,8 @@ function FitCamera({ steps }: { steps: number }) {
   const { camera, size } = useThree()
   useLayoutEffect(() => {
     const cam = camera as THREE.PerspectiveCamera
-    const width = (steps - 1) * SPACING + 2.4
+    // + margin for the end nodes, their labels and the pointer orbit
+    const width = (steps - 1) * SPACING + 3.6
     const half = Math.tan(THREE.MathUtils.degToRad(cam.fov / 2))
     const aspect = size.width / size.height
     cam.position.z = Math.max(width / (2 * half * aspect), 4.6 / (2 * half))

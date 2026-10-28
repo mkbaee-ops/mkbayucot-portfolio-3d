@@ -15,7 +15,7 @@ export function Experience() {
     >
       <ol className="relative border-l border-white/10 pl-6 md:pl-10">
         {experience.map((job) => (
-          <li key={job.role + job.period} className="relative pb-4">
+          <li key={job.role + job.period} className="relative pb-8 last:pb-0">
             <span aria-hidden="true" className="absolute -left-[31px] top-2 size-3 rounded-full bg-cyan shadow-[0_0_14px_3px_rgb(34_211_238/0.6)] md:-left-[47px]" />
             <Reveal className="glass rounded-3xl p-6 md:p-8">
               <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">

@@ -46,6 +46,34 @@ const CASE = 'https://mkbayucot.lovable.app'
 export const projects: Project[] = [
   // ───────────────────────────── Automations ─────────────────────────────
   {
+    id: 'lmbp-lead-research',
+    title: 'AI Lead Research Engine',
+    category: 'automation',
+    platform: 'Claude Code',
+    description:
+      'A code-first lead research pipeline for LMBP, built in Claude Code with Python and Scrapling. Type one request in chat and a full run finds companies hiring support staff, researches them, scores each A/B/C with source-linked evidence, enriches the best leads, and logs them to Google Sheets. Research only: no outreach.',
+    tools: ['Claude Code', 'Python', 'Scrapling', 'JSearch API', 'Prospeo', 'Apollo API', 'Google Sheets'],
+    stats: [
+      { value: '7', label: 'Job-data sources' },
+      { value: 'A/B/C', label: 'Evidence-based priority' },
+      { value: '0', label: 'Guessed emails' },
+    ],
+    steps: [
+      { label: 'Chat request', kind: 'trigger', detail: 'A lead request is typed in chat, e.g. "find 30 SaaS companies hiring customer support in Germany". One message is one full run.' },
+      { label: 'Claude Code', kind: 'ai', detail: 'Claude Code translates the request into a pipeline run (query, industry, location, limit) and reports the result summary back in chat.' },
+      { label: 'Job sources', kind: 'action', detail: 'Pulls postings from licensed APIs and feeds only. Boards whose terms forbid scraping (LinkedIn, Indeed, Glassdoor…) are never scraped.', branches: ['JSearch', 'Remotive', 'Remote OK', 'ATS boards'] },
+      { label: 'Group by company', kind: 'logic', detail: 'A job posting is a signal, not a lead. Postings are grouped by company, counting open support roles, how recent they are, and re-posts.' },
+      { label: 'Level 1 check', kind: 'logic', detail: 'Company fit, communication relevance and visible hiring. Clearly irrelevant companies go to a skip list and are not re-checked for a set period.' },
+      { label: 'Level 2 research', kind: 'data', detail: 'Scrapling reads the company’s own site for support channels, career page and growth news. robots.txt is checked first, with no anti-bot bypass.' },
+      { label: 'Score & priority', kind: 'router', detail: 'A 0–100 rubric. Priority A needs a score of 70+ and two independent signal categories. Every signal is a concrete fact with a source URL.', branches: ['A', 'B', 'C', 'Partner'] },
+      { label: 'Enrich A leads', kind: 'data', detail: 'Priority A leads get a public business email or decision-maker via official APIs (Prospeo, Apollo). An email is never guessed.' },
+      { label: 'Log to Sheets', kind: 'data', detail: 'Rows are de-duplicated by company name, domain and LinkedIn page; matches are updated, never duplicated. Each run also saves an Excel copy.' },
+      { label: 'Funnel report', kind: 'notify', detail: 'Prints a funnel summary: leads found, qualified A/B/C, emails found, rows logged, duplicates updated and pages that failed to load.' },
+    ],
+    liveLink: null,
+    githubLink: null, // client project, private repo
+  },
+  {
     id: 'client-onboarding',
     title: 'Client Onboarding Pipeline',
     category: 'automation',

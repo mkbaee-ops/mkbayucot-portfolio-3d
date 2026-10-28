@@ -9,7 +9,12 @@ import { useInView } from '../lib/useInView'
 
 const WorkflowScene = lazy(() => import('../three/WorkflowScene'))
 
-const PLATFORM_ICON: Record<string, string> = { Zapier: '/icons/zapier.svg', n8n: '/icons/n8n.svg', 'Make.com': '/icons/make.svg' }
+const PLATFORM_ICON: Record<string, string> = {
+  Zapier: '/icons/zapier.svg',
+  n8n: '/icons/n8n.svg',
+  'Make.com': '/icons/make.svg',
+  'Claude Code': '/icons/claude.svg',
+}
 
 export function Automations({ quality }: { quality: Quality }) {
   const [active, setActive] = useState(0)
