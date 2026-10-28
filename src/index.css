@@ -1,0 +1,170 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Space Grotesk Variable', 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+
+  --color-ink: #05060a;
+  --color-ink-2: #0a0d16;
+  --color-fg: #e6edf7;
+  --color-muted: #9aa8bd;
+  --color-cyan: #22d3ee;
+  --color-electric: #3b82f6;
+  --color-violet: #8b5cf6;
+  --color-line: rgb(255 255 255 / 0.09);
+}
+
+@layer base {
+  html {
+    background: var(--color-ink);
+    color: var(--color-fg);
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply font-sans antialiased;
+    background: var(--color-ink);
+    overflow-x: hidden;
+  }
+  h1,
+  h2,
+  h3 {
+    @apply font-display tracking-tight;
+  }
+  ::selection {
+    background: rgb(34 211 238 / 0.35);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-cyan);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+  section[id] {
+    scroll-margin-top: 72px;
+  }
+}
+
+@layer components {
+  /* No backdrop-filter here on purpose: blurring over a 60fps WebGL backdrop re-renders every frame.
+     A dense tint keeps text readable over the 3D and stays cheap. (.glass-blur is for small fixed UI.) */
+  .glass {
+    background: linear-gradient(180deg, rgb(20 26 42 / 0.78), rgb(10 13 22 / 0.82));
+    border: 1px solid var(--color-line);
+    box-shadow:
+      0 1px 0 rgb(255 255 255 / 0.05) inset,
+      0 20px 50px -20px rgb(0 0 0 / 0.6);
+  }
+  .glass-blur {
+    background: rgb(5 6 10 / 0.72);
+    border-bottom: 1px solid var(--color-line);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+  .text-gradient {
+    background: linear-gradient(100deg, var(--color-cyan), var(--color-electric) 45%, var(--color-violet));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .glow-ring {
+    box-shadow:
+      0 0 0 1px rgb(34 211 238 / 0.35),
+      0 0 30px -4px rgb(34 211 238 / 0.45);
+  }
+  .eyebrow {
+    @apply font-display text-xs font-medium uppercase tracking-[0.22em] text-cyan;
+  }
+  .btn-primary,
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition duration-200;
+  }
+  .btn-primary {
+    @apply text-ink;
+    background: linear-gradient(100deg, var(--color-cyan), #60a5fa);
+    box-shadow: 0 10px 30px -10px rgb(34 211 238 / 0.7);
+  }
+  .btn-primary:hover {
+    filter: brightness(1.08);
+    box-shadow: 0 12px 36px -8px rgb(34 211 238 / 0.9);
+  }
+  .btn-ghost {
+    @apply text-fg;
+    background: rgb(15 20 33 / 0.8);
+    border: 1px solid var(--color-line);
+  }
+  .btn-ghost:hover {
+    border-color: rgb(34 211 238 / 0.5);
+  }
+  /* Clearly marks content that still needs real data (see README → Placeholders). */
+  .placeholder-badge {
+    @apply inline-flex items-center gap-1 rounded-full border border-dashed border-amber-300/60 bg-amber-300/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-amber-200;
+  }
+}
+
+/* Static fallback backdrop, used when WebGL is off or the user prefers reduced motion */
+.static-backdrop {
+  background:
+    radial-gradient(60% 50% at 75% 30%, rgb(59 130 246 / 0.18), transparent 70%),
+    radial-gradient(45% 40% at 20% 70%, rgb(139 92 246 / 0.14), transparent 70%),
+    radial-gradient(30% 30% at 60% 60%, rgb(34 211 238 / 0.1), transparent 70%),
+    var(--color-ink);
+}
+
+/* 2D workflow pulse (mobile / low-power fallback) */
+@keyframes flow-dash {
+  to {
+    stroke-dashoffset: -24;
+  }
+}
+/* Each node flashes in turn: duration = steps × stagger, delay = index × stagger (set inline). */
+@keyframes node-seq {
+  0% {
+    box-shadow: 0 0 0 0 rgb(34 211 238 / 0);
+  }
+  6% {
+    box-shadow: 0 0 22px 2px rgb(34 211 238 / 0.55);
+    border-color: rgb(34 211 238 / 0.8);
+  }
+  25%,
+  100% {
+    box-shadow: 0 0 0 0 rgb(34 211 238 / 0);
+  }
+}
+@keyframes packet {
+  from {
+    top: -10%;
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  to {
+    top: 100%;
+    opacity: 0;
+  }
+}
+.flow-line {
+  stroke-dasharray: 4 8;
+  animation: flow-dash 1s linear infinite;
+}
+.node-seq {
+  animation-name: node-seq;
+  animation-timing-function: ease-out;
+  animation-iteration-count: infinite;
+}
+.packet {
+  animation: packet 1.2s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

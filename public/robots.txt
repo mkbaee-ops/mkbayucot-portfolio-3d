@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# PLACEHOLDER: update the domain once deployed
+Sitemap: https://mkbayucot.vercel.app/sitemap.xml
