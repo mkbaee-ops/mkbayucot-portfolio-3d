@@ -2,7 +2,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { lazy, Suspense, useState, type KeyboardEvent } from 'react'
 import { KIND_META, KindIcon } from '../components/StepKind'
 import { StepList } from '../components/StepList'
-import { ArrowUpRight, Reveal, Section } from '../components/ui'
+import { ArrowUpRight, LogoIcon, Reveal, Section } from '../components/ui'
 import { automationProjects as projects } from '../data/projects'
 import type { Quality } from '../lib/device'
 import { useInView } from '../lib/useInView'
@@ -69,7 +69,7 @@ export function Automations({ quality }: { quality: Quality }) {
                 i === active ? 'border-cyan/60 bg-cyan/10 text-white glow-ring' : 'border-line bg-white/[0.03] text-muted hover:border-white/25 hover:text-fg'
               }`}
             >
-              {PLATFORM_ICON[p.platform ?? ''] && <img src={PLATFORM_ICON[p.platform ?? '']} alt="" width={14} height={14} className="size-3.5 opacity-80" />}
+              {PLATFORM_ICON[p.platform ?? ''] && <LogoIcon src={PLATFORM_ICON[p.platform ?? '']} className="size-3.5 opacity-80" />}
               {p.title}
             </button>
           ))}
@@ -188,7 +188,13 @@ export function Automations({ quality }: { quality: Quality }) {
                       GitHub <ArrowUpRight />
                     </a>
                   )}
+                  {project.deepDive && (
+                    <a href={`#case-${project.deepDive}`} className="btn-primary !py-2.5">
+                      Read the engineering case study
+                    </a>
+                  )}
                 </div>
+                {!project.githubLink && project.repoNote && <p className="text-xs text-muted">{project.repoNote}</p>}
               </div>
             </div>
           </div>

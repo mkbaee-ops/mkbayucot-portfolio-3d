@@ -4,6 +4,7 @@ const LINKS = [
   { href: '#about', label: 'About' },
   { href: '#automations', label: 'Automations' },
   { href: '#web', label: 'Web' },
+  { href: '#case-studies', label: 'Case Studies' },
   { href: '#stack', label: 'Stack' },
   { href: '#experience', label: 'Experience' },
   { href: '#contact', label: 'Contact' },
@@ -37,7 +38,7 @@ export function Nav() {
           <span className="hidden sm:inline">Mark Klent Bayucot</span>
         </a>
 
-        <ul className="hidden items-center gap-1 md:flex">
+        <ul className="hidden items-center gap-1 lg:flex">
           {LINKS.map((l) => (
             <li key={l.href}>
               <a href={l.href} className="rounded-full px-3 py-2 text-sm text-muted transition hover:bg-white/5 hover:text-fg">
@@ -49,7 +50,7 @@ export function Nav() {
 
         <button
           type="button"
-          className="grid size-10 place-items-center rounded-full border border-line text-fg md:hidden"
+          className="grid size-10 place-items-center rounded-full border border-line text-fg lg:hidden"
           aria-expanded={open}
           aria-controls="mobile-menu"
           aria-label={open ? 'Close menu' : 'Open menu'}
@@ -62,7 +63,7 @@ export function Nav() {
       </nav>
 
       {open && (
-        <ul id="mobile-menu" className="flex flex-col gap-1 px-4 pb-4 md:hidden">
+        <ul id="mobile-menu" className="flex flex-col gap-1 px-4 pb-4 lg:hidden">
           {LINKS.map((l) => (
             <li key={l.href}>
               <a href={l.href} onClick={() => setOpen(false)} className="block rounded-xl px-3 py-3 text-base text-fg hover:bg-white/5">

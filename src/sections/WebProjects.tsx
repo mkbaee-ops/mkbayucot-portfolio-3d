@@ -1,6 +1,6 @@
 import { motion, useMotionValue, useReducedMotion, useSpring, useTransform } from 'framer-motion'
 import type { PointerEvent } from 'react'
-import { ArrowUpRight, GitHubIcon, PlaceholderBadge, Reveal, Section } from '../components/ui'
+import { ArrowUpRight, GitHubIcon, Reveal, Section } from '../components/ui'
 import { webProjects, type Project } from '../data/projects'
 
 function TiltCard({ project }: { project: Project }) {
@@ -25,7 +25,7 @@ function TiltCard({ project }: { project: Project }) {
     <article onPointerMove={onMove} onPointerLeave={reset} className="h-full [perspective:1200px]">
       <motion.div
         style={reduce ? undefined : { rotateX, rotateY, transformStyle: 'preserve-3d' }}
-        className={`glass flex h-full flex-col rounded-3xl p-5 ${project.placeholder ? '!border-dashed !border-amber-300/30' : ''}`}
+        className="glass flex h-full flex-col rounded-3xl p-5"
       >
         {/* Laptop mockup */}
         <div style={{ transform: 'translateZ(40px)' }} className="relative">
@@ -34,11 +34,8 @@ function TiltCard({ project }: { project: Project }) {
               {project.image ? (
                 <img src={project.image} alt={project.imageAlt ?? `${project.title} screenshot`} loading="lazy" decoding="async" className="size-full object-cover object-top" />
               ) : (
-                <div className="grid size-full place-items-center bg-[linear-gradient(135deg,rgb(34_211_238/0.12),rgb(139_92_246/0.12))] text-center">
-                  <div>
-                    <PlaceholderBadge />
-                    <p className="mt-2 px-4 text-xs text-muted">Screenshot goes here</p>
-                  </div>
+                <div aria-hidden="true" className="grid size-full place-items-center bg-[linear-gradient(135deg,rgb(34_211_238/0.12),rgb(139_92_246/0.12))] font-display text-lg text-fg/70">
+                  {project.title}
                 </div>
               )}
             </div>
@@ -47,10 +44,7 @@ function TiltCard({ project }: { project: Project }) {
         </div>
 
         <div style={{ transform: 'translateZ(20px)' }} className="mt-6 flex flex-1 flex-col">
-          <p className="eyebrow flex items-center gap-2">
-            {project.platform}
-            {project.placeholder && <PlaceholderBadge />}
-          </p>
+          <p className="eyebrow">{project.platform}</p>
           <h3 className="mt-2 text-xl font-semibold text-fg">{project.title}</h3>
           <p className="mt-2 text-sm leading-relaxed text-muted">{project.description}</p>
           <ul aria-label="Tools used" className="mt-4 flex flex-wrap gap-1.5">
@@ -61,23 +55,26 @@ function TiltCard({ project }: { project: Project }) {
             ))}
           </ul>
           <div className="mt-auto flex flex-wrap items-center gap-2 pt-5">
-            {project.liveLink ? (
+            {project.liveLink && (
               <a href={project.liveLink} target="_blank" rel="noreferrer" className="btn-primary !py-2.5">
                 Live site <ArrowUpRight />
                 <span className="sr-only">: {project.title}</span>
               </a>
-            ) : (
-              <PlaceholderBadge>Live link</PlaceholderBadge>
             )}
-            {project.githubLink ? (
+            {project.githubLink && (
               <a href={project.githubLink} target="_blank" rel="noreferrer" className="btn-ghost !py-2.5">
                 <GitHubIcon /> Code
                 <span className="sr-only">: {project.title} on GitHub</span>
               </a>
-            ) : (
-              <PlaceholderBadge>GitHub link</PlaceholderBadge>
+            )}
+            {project.deepDive && (
+              <a href={`#case-${project.deepDive}`} className="btn-ghost !py-2.5">
+                Case study
+                <span className="sr-only">: {project.title}</span>
+              </a>
             )}
           </div>
+          {!project.githubLink && project.repoNote && <p className="mt-3 text-xs text-muted">{project.repoNote}</p>}
         </div>
       </motion.div>
     </article>
@@ -95,7 +92,7 @@ export function WebProjects() {
           Shipped to the web, <span className="text-gradient">not just to a canvas.</span>
         </>
       }
-      intro="Landing pages and full-stack apps built with Claude Code, GitHub, Supabase and Vercel."
+      intro="Full-stack apps and sites built with Claude Code, GitHub, Supabase and Vercel."
     >
       <ul className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {webProjects.map((p, i) => (

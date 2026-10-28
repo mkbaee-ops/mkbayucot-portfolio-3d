@@ -5,7 +5,7 @@ export function Experience() {
   return (
     <Section
       id="experience"
-      index="05"
+      index="06"
       eyebrow="Experience"
       title={
         <>
@@ -36,7 +36,7 @@ export function Experience() {
               {job.summary && <p className="mt-4 max-w-3xl leading-relaxed text-fg/85">{job.summary}</p>}
 
               {job.metrics && (
-                <dl className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-4">
+                <dl className="mt-6 grid gap-3 sm:grid-cols-3">
                   {job.metrics.map((m) => (
                     <div key={m.label} className="flex flex-col-reverse justify-end rounded-2xl border border-line bg-white/[0.03] p-4">
                       <dt className="mt-1 text-xs leading-snug text-muted">{m.label}</dt>

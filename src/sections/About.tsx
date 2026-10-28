@@ -40,7 +40,7 @@ export function About() {
           </Reveal>
 
           <Reveal delay={0.1}>
-            <dl className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 xl:grid-cols-5">
+            <dl className="mt-10 grid gap-3 sm:grid-cols-3">
               {profile.stats.map((s) => (
                 <div key={s.label} className="glass flex flex-col-reverse justify-end rounded-2xl p-4">
                   <dt className="mt-1 text-xs leading-snug text-muted">{s.label}</dt>

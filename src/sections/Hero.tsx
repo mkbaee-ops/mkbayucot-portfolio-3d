@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { counts, profile } from '../data/profile'
 
-const proof = [`${counts.automations} automation projects`, `${counts.webApps} web apps shipped`, '99% automation uptime']
+const proof = [`${counts.automations} automation projects`, `${counts.webApps} apps live in production`, '2 engineering case studies']
 
 const fade = (delay: number) => ({
   initial: { opacity: 0, y: 16 },
@@ -32,9 +32,7 @@ export function Hero() {
 
           <motion.p {...fade(0.1)} className="mt-5 max-w-xl font-display text-lg font-medium text-fg/90 sm:text-xl">
             I build real AI systems.{' '}
-            <span className="text-muted">
-              {profile.title}, {profile.goal}.
-            </span>
+            <span className="text-muted">Automations and full-stack apps, shipped to production for real clients.</span>
           </motion.p>
 
           <motion.p {...fade(0.18)} className="mt-4 max-w-xl text-base leading-relaxed text-muted sm:text-lg">

@@ -5,10 +5,12 @@ import { profile } from './data/profile'
 import { useQuality } from './lib/device'
 import { About } from './sections/About'
 import { Automations } from './sections/Automations'
+import { CaseStudies } from './sections/CaseStudies'
 import { Contact } from './sections/Contact'
 import { Experience } from './sections/Experience'
 import { Hero } from './sections/Hero'
 import { TechStack } from './sections/TechStack'
+import { Testimonials } from './sections/Testimonials'
 import { WebProjects } from './sections/WebProjects'
 
 const BackgroundScene = lazy(() => import('./three/BackgroundScene'))
@@ -40,7 +42,24 @@ function useAfterLoad(deferToInteraction: boolean) {
   return ready
 }
 
+/**
+ * The page is rendered by React after load, so the browser's own jump to `#section` runs before the
+ * section exists. Re-apply it once the page has rendered and again when fonts/images settle the layout.
+ */
+function useHashScroll() {
+  useEffect(() => {
+    const id = decodeURIComponent(window.location.hash.slice(1))
+    if (!id) return
+    const go = () => document.getElementById(id)?.scrollIntoView()
+    requestAnimationFrame(go)
+    document.fonts?.ready.then(go)
+    window.addEventListener('load', go, { once: true })
+    return () => window.removeEventListener('load', go)
+  }, [])
+}
+
 export default function App() {
+  useHashScroll()
   const quality = useQuality()
   const ready = useAfterLoad(quality === 'lite')
   const [sceneShown, setSceneShown] = useState(false)
@@ -69,8 +88,10 @@ export default function App() {
           <About />
           <Automations quality={quality} />
           <WebProjects />
+          <CaseStudies />
           <TechStack quality={quality} />
           <Experience />
+          <Testimonials />
           <Contact />
         </main>
         <footer className="border-t border-line">

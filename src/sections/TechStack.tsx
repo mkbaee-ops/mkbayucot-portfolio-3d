@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react'
-import { Reveal, Section } from '../components/ui'
+import { LogoIcon, Reveal, Section } from '../components/ui'
 import { stack } from '../data/profile'
 import type { Quality } from '../lib/device'
 import { useInView } from '../lib/useInView'
@@ -18,7 +18,7 @@ export function TechStack({ quality }: { quality: Quality }) {
           className={`flex items-center gap-2 rounded-full border px-3 py-1.5 text-sm ${t.core ? 'border-cyan/40 bg-cyan/10 text-white' : 'border-line bg-white/[0.03] text-fg/80'}`}
         >
           {t.icon ? (
-            <img src={t.icon} alt="" width={16} height={16} loading="lazy" className="size-4" />
+            <LogoIcon src={t.icon} />
           ) : (
             <span aria-hidden="true" className="grid size-4 place-items-center rounded bg-cyan/20 text-[8px] font-bold text-cyan">
               {t.name.slice(0, 2)}
@@ -33,7 +33,7 @@ export function TechStack({ quality }: { quality: Quality }) {
   return (
     <Section
       id="stack"
-      index="04"
+      index="05"
       eyebrow="Tech Stack"
       title={
         <>

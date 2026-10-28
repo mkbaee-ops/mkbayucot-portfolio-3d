@@ -37,7 +37,11 @@ export type Project = {
   liveLink?: string | null
   githubLink?: string | null
   caseStudyLink?: string | null
-  /** true = template slot, rendered with a PLACEHOLDER badge. Delete or fill in. */
+  /** id of an engineering case study in caseStudies.ts (adds a "Read the engineering case study" link) */
+  deepDive?: string
+  /** Shown as plain text when there's no public repo, e.g. 'Private client repo' */
+  repoNote?: string
+  /** true = template slot, excluded from counts. */
   placeholder?: boolean
 }
 
@@ -54,7 +58,7 @@ export const projects: Project[] = [
       'A code-first lead research pipeline for LMBP, built in Claude Code with Python and Scrapling. Type one request in chat and a full run finds companies hiring support staff, researches them, scores each A/B/C with source-linked evidence, enriches the best leads, and logs them to Google Sheets. Research only: no outreach.',
     tools: ['Claude Code', 'Python', 'Scrapling', 'JSearch API', 'Prospeo', 'Apollo API', 'Google Sheets'],
     stats: [
-      { value: '7', label: 'Job-data sources' },
+      { value: '13', label: 'Job-data sources' },
       { value: 'A/B/C', label: 'Evidence-based priority' },
       { value: '0', label: 'Guessed emails' },
     ],
@@ -71,7 +75,9 @@ export const projects: Project[] = [
       { label: 'Funnel report', kind: 'notify', detail: 'Prints a funnel summary: leads found, qualified A/B/C, emails found, rows logged, duplicates updated and pages that failed to load.' },
     ],
     liveLink: null,
-    githubLink: null, // client project, private repo
+    githubLink: null,
+    repoNote: 'Private client repo',
+    deepDive: 'lead-engine',
   },
   {
     id: 'client-onboarding',
@@ -300,30 +306,6 @@ export const projects: Project[] = [
 
   // ─────────────────────── Web apps & landing pages ───────────────────────
   {
-    id: 'automation-portfolio',
-    title: 'Automation Portfolio',
-    category: 'web',
-    platform: 'Portfolio site',
-    description:
-      'My current portfolio: eight automation case studies with build screenshots, services, work history, and a built-in call-booking calendar.',
-    tools: ['Lovable'],
-    image: '/images/projects/lovable-portfolio.webp',
-    imageAlt: 'Homepage of the Mark Klent Bayucot automation portfolio, dark theme with profile photo',
-    liveLink: 'https://mkbayucot.lovable.app',
-    githubLink: null, // PLACEHOLDER
-  },
-  {
-    id: 'placeholder-landing-page',
-    title: 'Your landing page',
-    category: 'web',
-    platform: 'Landing page',
-    description: 'PLACEHOLDER: add a landing page you shipped, with a screenshot in /public/images/projects.',
-    tools: ['Claude Code', 'Vercel'],
-    liveLink: null,
-    githubLink: null,
-    placeholder: true,
-  },
-  {
     id: 'lmbp-talent-app',
     title: 'LMBP Talent App',
     category: 'web',
@@ -334,7 +316,22 @@ export const projects: Project[] = [
     image: '/images/projects/lmbp-talent-app.webp',
     imageAlt: 'LMBP homepage: "Systems first. Then scale." headline beside the LMBP Team logo',
     liveLink: 'https://lmbp-talent-app.vercel.app/',
-    githubLink: null, // PLACEHOLDER
+    githubLink: null,
+    repoNote: 'Private client repo',
+    deepDive: 'talent-app',
+  },
+  {
+    id: 'automation-portfolio',
+    title: 'Automation Portfolio',
+    category: 'web',
+    platform: 'Portfolio site',
+    description:
+      'My current portfolio: eight automation case studies with build screenshots, services, work history, and a built-in call-booking calendar.',
+    tools: ['Lovable'],
+    image: '/images/projects/lovable-portfolio.webp',
+    imageAlt: 'Homepage of the Mark Klent Bayucot automation portfolio, dark theme with profile photo',
+    liveLink: 'https://mkbayucot.lovable.app',
+    githubLink: null,
   },
 ]
 

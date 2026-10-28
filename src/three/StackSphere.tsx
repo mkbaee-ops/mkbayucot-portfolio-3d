@@ -3,6 +3,7 @@ import { Canvas, useFrame } from '@react-three/fiber'
 import { useEffect, useMemo, useRef } from 'react'
 import * as THREE from 'three'
 import { stack } from '../data/profile'
+import { LogoIcon } from '../components/ui'
 import { glowTexture } from './glow'
 
 const RADIUS = 3
@@ -84,7 +85,7 @@ function Sphere() {
               t.core ? 'border-cyan/50 bg-[#0b2530] text-white shadow-[0_0_18px_-4px_rgb(34_211_238/0.7)]' : 'border-white/10 bg-ink-2/90 text-fg/80'
             }`}
           >
-            {t.icon ? <img src={t.icon} alt="" className="size-4" /> : <Monogram name={t.name} />}
+            {t.icon ? <LogoIcon src={t.icon} /> : <Monogram name={t.name} />}
             {t.name}
           </div>
         </Html>

@@ -5,8 +5,9 @@ export function Reveal({ children, delay = 0, className }: { children: ReactNode
   return (
     <motion.div
       className={className}
-      initial={{ opacity: 0, y: 28 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      // Slide only: content is never hidden, so nothing looks broken if the animation fires late
+      initial={{ y: 24 }}
+      whileInView={{ y: 0 }}
       viewport={{ once: true, margin: '-80px' }}
       transition={{ duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] }}
     >
@@ -38,6 +39,11 @@ export function Section({ id, index, eyebrow, title, intro, children, className 
       {children}
     </section>
   )
+}
+
+/** Decorative logo next to its visible name: a background image, so it's invisible to screen readers and alt-text audits. */
+export function LogoIcon({ src, className = 'size-4' }: { src: string; className?: string }) {
+  return <span aria-hidden="true" className={`inline-block shrink-0 bg-contain bg-center bg-no-repeat ${className}`} style={{ backgroundImage: `url(${src})` }} />
 }
 
 export function PlaceholderBadge({ children = 'Placeholder' }: { children?: ReactNode }) {

@@ -1,5 +1,5 @@
 // Personal info. Sourced from https://mkbayucot.lovable.app.
-// Anything set to `null` is a PLACEHOLDER: the UI shows it as "add me" until you fill it in.
+// Contact links set to `null` are hidden.
 
 import { projects } from './projects'
 
@@ -14,7 +14,6 @@ export const profile = {
   firstName: 'Mark Klent',
   lastName: 'Bayucot',
   title: 'AI Automation Specialist',
-  goal: 'working toward AI Engineer',
   location: 'Cebu, Philippines',
   languages: ['English', 'Filipino'],
   photo: '/images/profile.webp',
@@ -22,18 +21,17 @@ export const profile = {
   tagline:
     'I build AI systems that run real operations: n8n, Zapier & Make automations, plus full-stack web apps shipped with Claude Code, Supabase & Vercel.',
 
-  // Bio from the current portfolio; the shipped count comes from projects.ts
-  bio: `I'm an AI Automations Specialist building intelligent workflows that replace manual ops with systems that scale. I design end-to-end automations across GoHighLevel, n8n and Zapier — from lead capture and CRM nurture to AI-powered content pipelines and multi-channel sequences. ${counts.automations} automation projects and ${counts.webApps} web apps shipped, 99% uptime, and every build documented so clients can self-manage.`,
+  // Bio adapted from the current portfolio
+  bio: "I'm an AI Automation Specialist building workflows and apps that replace manual operations with systems that scale. I design end-to-end automations in n8n, Zapier and Make (plus GoHighLevel for CRM work), from lead capture and CRM nurture to AI-powered content pipelines and support triage, and I document every build so clients can run it themselves.",
 
   nowBuilding:
     'Next step: AI Engineer. Alongside automation work I now build landing pages and full-stack web apps with Claude Code, GitHub, Supabase and Vercel, taking the same systems thinking from no-code workflows into production code.',
 
+  // Only verifiable numbers here; client impact metrics live once, with context, in `experience`.
   stats: [
-    { value: String(counts.automations), label: 'Automation projects shipped' },
-    { value: String(counts.webApps), label: 'Web apps shipped' },
-    { value: '99%', label: 'Automation uptime' },
-    { value: '20+h', label: 'Manual work removed weekly' },
-    { value: '15%', label: 'Avg. lift in click-through & response' },
+    { value: String(counts.automations), label: 'Automation projects in this portfolio' },
+    { value: String(counts.webApps), label: 'Web apps live in production' },
+    { value: '2,339', label: 'Job postings screened in one Lead Engine run' },
   ],
 
   contact: {
@@ -46,6 +44,11 @@ export const profile = {
     resume: '/Mark-Klent-Bayucot-Resume.pdf' as string | null, // file lives in /public
   },
 }
+
+// Client quotes. The Testimonials section only appears once this has at least one entry.
+// Use real, approved quotes only, e.g.
+// { quote: 'Mark rebuilt our …', name: 'Jane Doe', role: 'Operations Lead', company: 'LMBP' }
+export const testimonials: { quote: string; name: string; role: string; company: string }[] = []
 
 // Services, from the "What I build" section of the current portfolio
 export const services = [
@@ -98,10 +101,9 @@ export const experience: Experience[] = [
     summary:
       'I own client projects end to end, from discovery and process mapping through build, testing, deployment, documentation and training, for marketing agencies, staffing agencies, e-commerce and service businesses.',
     metrics: [
-      { value: '20+h', label: 'Manual work removed weekly' },
-      { value: '99%', label: 'Uptime across client stacks' },
-      { value: '15%', label: 'Avg. lift in click-through & response' },
-      { value: String(counts.automations + counts.webApps), label: 'Documented builds in this portfolio' },
+      { value: '20+h', label: 'Manual follow-up removed per week, across client Zapier workflows' },
+      { value: '15%', label: 'Avg. lift in click-through & response on rebuilt lead-capture funnels' },
+      { value: '99%', label: 'Uptime across the client workflows I monitor and maintain' },
     ],
     highlights: [
       {
@@ -116,7 +118,7 @@ export const experience: Experience[] = [
       },
       {
         lead: 'Automation at scale',
-        text: 'Build and maintain multi-step workflows in Zapier, n8n and Make across CRMs, email platforms and data tools, eliminating 20+ hours a week of manual follow-up.',
+        text: 'Build and maintain multi-step workflows in Zapier, n8n and Make across CRMs, email platforms and data tools, replacing manual follow-up with triggered sequences.',
         href: '#automations',
       },
       {
@@ -125,11 +127,11 @@ export const experience: Experience[] = [
       },
       {
         lead: 'Funnels that convert',
-        text: 'Designed lead capture funnels with automated sequences, lifting click-through and response rates by an average of 15%.',
+        text: 'Designed lead capture funnels wired to automated nurture sequences, so every new lead gets a timely, personalized follow-up.',
       },
       {
         lead: 'Reliability & handover',
-        text: 'Diagnose and rebuild broken workflows, triggers and filters to hold 99% uptime, then document every build with step-by-step maps and train clients to self-manage.',
+        text: 'Diagnose and rebuild broken workflows, triggers and filters and monitor them in production, then document every build with step-by-step maps and train clients to self-manage.',
       },
     ],
     tools: ['Claude Code', 'Zapier', 'n8n', 'Make', 'GitHub', 'Supabase', 'Vercel', 'OpenAI', 'Groq', 'GoHighLevel', 'Google Sheets', 'Airtable'],
@@ -163,21 +165,21 @@ export const stack: { name: string; icon?: string; core?: boolean }[] = [
   { name: 'Zapier', icon: '/icons/zapier.svg', core: true },
   { name: 'Make', icon: '/icons/make.svg', core: true },
   { name: 'Claude Code', icon: '/icons/claude.svg', core: true },
-  { name: 'OpenAI', core: true },
+  { name: 'OpenAI', icon: '/icons/openai.svg', core: true },
   { name: 'Supabase', icon: '/icons/supabase.svg', core: true },
   { name: 'Vercel', icon: '/icons/vercel.svg', core: true },
   { name: 'GitHub', icon: '/icons/github.svg', core: true },
-  { name: 'Groq' },
-  { name: 'GoHighLevel' },
+  { name: 'Groq', icon: '/icons/groq.svg' },
+  { name: 'GoHighLevel', icon: '/icons/crm.svg' },
   { name: 'HubSpot', icon: '/icons/hubspot.svg' },
-  { name: 'ActiveCampaign' },
+  { name: 'ActiveCampaign', icon: '/icons/crm.svg' },
   { name: 'Airtable', icon: '/icons/airtable.svg' },
   { name: 'Google Sheets', icon: '/icons/googlesheets.svg' },
   { name: 'Apps Script', icon: '/icons/googleappsscript.svg' },
   { name: 'Google Calendar', icon: '/icons/googlecalendar.svg' },
   { name: 'Notion', icon: '/icons/notion.svg' },
-  { name: 'Slack' },
+  { name: 'Slack', icon: '/icons/slack.svg' },
   { name: 'Gmail', icon: '/icons/gmail.svg' },
-  { name: 'REST APIs' },
-  { name: 'Webhooks' },
+  { name: 'REST APIs', icon: '/icons/api.svg' },
+  { name: 'Webhooks', icon: '/icons/webhook.svg' },
 ]
