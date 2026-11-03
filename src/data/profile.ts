@@ -19,7 +19,7 @@ export const profile = {
   photo: '/images/profile.webp',
 
   tagline:
-    'I build AI systems that run real operations: n8n, Zapier & Make automations, plus full-stack web apps shipped with Claude Code, Supabase & Vercel.',
+    'AI lead scoring, support bots and content pipelines in n8n, Zapier and Make, plus full-stack web apps built with Claude Code, Supabase and Vercel.',
 
   // Bio adapted from the current portfolio
   bio: "I'm an AI Automation Specialist building workflows and apps that replace manual operations with systems that scale. I design end-to-end automations in n8n, Zapier and Make (plus GoHighLevel for CRM work), from lead capture and CRM nurture to AI-powered content pipelines and support triage, and I document every build so clients can run it themselves.",

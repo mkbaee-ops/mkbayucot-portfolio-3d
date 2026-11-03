@@ -1,5 +1,6 @@
 import { AnimatePresence, motion } from 'framer-motion'
-import { lazy, Suspense, useState, type KeyboardEvent } from 'react'
+import { lazy, Suspense, useEffect, useState, type KeyboardEvent } from 'react'
+import { CaseStudyDialog } from '../components/CaseStudyDialog'
 import { KIND_META, KindIcon } from '../components/StepKind'
 import { StepList } from '../components/StepList'
 import { ArrowUpRight, LogoIcon, Reveal, Section } from '../components/ui'
@@ -24,10 +25,32 @@ export function Automations({ quality }: { quality: Quality }) {
   const steps = project.steps ?? []
   const use3D = quality === 'full'
 
+  const [caseOpen, setCaseOpen] = useState(false)
+
   const selectProject = (i: number) => {
     setActive(i)
     setStep(0)
   }
+
+  // Case studies have shareable links: #cs-<project id> opens that project's case study.
+  const openCase = () => {
+    setCaseOpen(true)
+    history.replaceState(null, '', `#cs-${project.id}`)
+  }
+  const closeCase = () => {
+    setCaseOpen(false)
+    if (location.hash.startsWith('#cs-')) history.replaceState(null, '', '#automations')
+  }
+  useEffect(() => {
+    const id = location.hash.startsWith('#cs-') ? location.hash.slice(4) : ''
+    const i = projects.findIndex((p) => p.id === id && p.caseStudy)
+    if (i < 0) return
+    // one-off sync from the URL on first load
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    selectProject(i)
+    setCaseOpen(true)
+    document.getElementById('automations')?.scrollIntoView()
+  }, [])
 
   const onTabKey = (e: KeyboardEvent<HTMLButtonElement>) => {
     const delta = { ArrowRight: 1, ArrowLeft: -1 }[e.key]
@@ -106,7 +129,7 @@ export function Automations({ quality }: { quality: Quality }) {
                     <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgb(59_130_246/0.12),transparent_70%)]" />
                     {seen ? (
                       <Suspense fallback={<SceneLoading />}>
-                        <WorkflowScene steps={steps} selected={step} onSelect={setStep} playing={visible} />
+                        <WorkflowScene steps={steps} selected={step} onSelect={setStep} playing={visible && !caseOpen} />
                       </Suspense>
                     ) : (
                       <SceneLoading />
@@ -173,6 +196,11 @@ export function Automations({ quality }: { quality: Quality }) {
                 )}
 
                 <div className="flex flex-wrap gap-2">
+                  {project.caseStudy && (
+                    <button type="button" onClick={openCase} aria-haspopup="dialog" className="btn-primary !py-2.5">
+                      Read the case study
+                    </button>
+                  )}
                   {project.caseStudyLink && (
                     <a href={project.caseStudyLink} target="_blank" rel="noreferrer" className="btn-primary !py-2.5">
                       Read the case study <ArrowUpRight />
@@ -200,6 +228,7 @@ export function Automations({ quality }: { quality: Quality }) {
           </div>
         </div>
       </Reveal>
+      <CaseStudyDialog project={caseOpen ? project : null} onClose={closeCase} />
     </Section>
   )
 }

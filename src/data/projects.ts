@@ -37,6 +37,11 @@ export type Project = {
   liveLink?: string | null
   githubLink?: string | null
   caseStudyLink?: string | null
+  /** On-site case study, opened from the project panel */
+  caseStudy?: {
+    howItWorks: { stage: string; title: string; body: string }[]
+    proof: { image: string; alt: string; title: string; caption: string; points?: string[] }[]
+  }
   /** id of an engineering case study in caseStudies.ts (adds a "Read the engineering case study" link) */
   deepDive?: string
   /** Shown as plain text when there's no public repo, e.g. 'Private client repo' */
@@ -44,8 +49,6 @@ export type Project = {
   /** true = template slot, excluded from counts. */
   placeholder?: boolean
 }
-
-const CASE = 'https://mkbayucot.lovable.app'
 
 export const projects: Project[] = [
   // ───────────────────────────── Automations ─────────────────────────────
@@ -105,7 +108,63 @@ export const projects: Project[] = [
     ],
     image: '/images/projects/client-onboarding.webp',
     imageAlt: 'Zapier editor showing the 22-step Client Onboarding Zap with four path branches',
-    caseStudyLink: `${CASE}/portfolio.html`,
+    caseStudy: {
+      howItWorks: [
+        {
+          stage: "Trigger",
+          title: "New Typeform entry",
+          body: "A client completes the intake form. The Zap fires instantly — no waiting, no polling delay.",
+        },
+        {
+          stage: "Filter + Format",
+          title: "Validate & clean",
+          body: "Filter by Zapier checks conditions so only qualified submissions proceed. A date formatter standardizes the start date field.",
+        },
+        {
+          stage: "Storage",
+          title: "Drive folder + Sheets log",
+          body: "A named project folder is created in Google Drive. A structured row is appended to the onboarding tracker spreadsheet.",
+        },
+        {
+          stage: "Delivery",
+          title: "3 outputs in parallel",
+          body: "Paths by Zapier routes to Trello (project card), Gmail (welcome email), and Slack (team alert).",
+        },
+      ],
+      proof: [
+        {
+          image: "/images/projects/client-onboarding.webp",
+          alt: "Zapier run history of the 22-step Client Onboarding Zap with four path branches",
+          title: "22-step Zapier workflow, successfully executed",
+          caption: "Typeform trigger, Filter by Zapier, Formatter (Date/Time), Google Drive folder, Google Sheets row, and a 4-way Paths split, each path running Trello, Gmail and Slack steps.",
+          points: ["Steps 1–6: Trigger → Filter → Format → Drive → Sheets → Split", "Paths A–C: condition rules (did not run, tier filter)", "Path D: all 3 outputs fired successfully"],
+        },
+        {
+          image: "/images/projects/onboarding-sheets.webp",
+          alt: "Google Sheets onboarding tracker with timestamp, client name, email, service, start date, Drive link and status columns",
+          title: "Live spreadsheet tracker",
+          caption: "Every submission auto-populates a structured row with a status of \"Onboarding\". The Drive folder link comes from the previous step’s output.",
+        },
+        {
+          image: "/images/projects/onboarding-email.webp",
+          alt: "Personalized welcome email in Gmail listing project details and next steps",
+          title: "Personalized welcome email via Gmail",
+          caption: "Sent automatically with the project details, a direct link to the client’s Drive folder, and a 4-step next-steps checklist.",
+        },
+        {
+          image: "/images/projects/onboarding-trello.webp",
+          alt: "Trello board with columns New Clients, In Progress, Kick-off Scheduled, Onboarded and On Hold",
+          title: "Trello card in \"New Clients\"",
+          caption: "The card lands on the Client Onboarding board, ready to move through New Clients → In Progress → Kick-off Scheduled → Onboarded.",
+        },
+        {
+          image: "/images/projects/onboarding-slack.webp",
+          alt: "Slack message in #client-onboarding with client name, company, budget, start date and Drive folder link",
+          title: "Structured Slack alert",
+          caption: "The team is notified in #client-onboarding with the client details, Drive folder link and an action prompt to assign a team member and schedule kick-off.",
+        },
+      ],
+    },
   },
   {
     id: 'social-media-calendar',
@@ -134,7 +193,49 @@ export const projects: Project[] = [
     ],
     image: '/images/projects/social-media-calendar.webp',
     imageAlt: 'Zapier editor showing the Social Media Content Calendar workflow',
-    caseStudyLink: `${CASE}/social-media-calendar.html`,
+    caseStudy: {
+      howItWorks: [
+        {
+          stage: "Trigger",
+          title: "New Sheets row",
+          body: "A new approved post in the content calendar fires the Zap — no polling delay, no manual push.",
+        },
+        {
+          stage: "Filter + Format",
+          title: "Validate & schedule",
+          body: "Only \"approved\" rows proceed. Formatter normalizes the publish date/time for downstream steps.",
+        },
+        {
+          stage: "Paths",
+          title: "3 platform splits",
+          body: "Paths by Zapier routes the post into one of three platform-specific tracks (LinkedIn, Instagram, X).",
+        },
+        {
+          stage: "AI",
+          title: "Caption per platform",
+          body: "AI by Zapier generates a tone-matched caption sized for each channel’s best-practice format.",
+        },
+        {
+          stage: "Delivery",
+          title: "Trello + Gmail + Slack",
+          body: "A Trello card is created for the designer, the creator gets a Gmail brief, and the team is pinged on Slack.",
+        },
+        {
+          stage: "Reminder",
+          title: "24h pre-live ping",
+          body: "Delay by Zapier holds the second Slack message until 24 hours before publish — nothing slips.",
+        },
+      ],
+      proof: [
+        {
+          image: "/images/projects/social-media-calendar.webp",
+          alt: "Zapier editor showing the 28-step Social Media Content Calendar workflow",
+          title: "28-step Zapier + AI workflow",
+          caption: "Multi-path content automation: Sheets trigger, Filter, Formatter, 3-way Paths split, AI captions per platform, Trello task, Gmail, Slack, 24h delay and a pre-live reminder.",
+          points: ["Steps 1–4: Trigger → Filter → Format → Paths split", "Each path: AI caption → Trello → Gmail → Slack → Delay → Slack reminder", "3 parallel platform tracks, zero manual handoffs"],
+        },
+      ],
+    },
   },
   {
     id: 'crm-sales-pipeline',
@@ -162,7 +263,45 @@ export const projects: Project[] = [
     ],
     image: '/images/projects/crm-outreach.webp',
     imageAlt: 'Zapier editor showing the CRM outreach sequence Zap with three lead-score paths',
-    caseStudyLink: `${CASE}/crm-sales-pipeline.html`,
+    caseStudy: {
+      howItWorks: [
+        {
+          stage: "Zap 1 · 8 steps",
+          title: "Lead intake",
+          body: "Typeform → Filter → Formatter (Date) → Formatter (Text) → AI by Zapier (Hot / Warm / Cold) → Formatter (Utilities) → Google Sheets row → Trello card.",
+        },
+        {
+          stage: "Zap 2 · 21 steps",
+          title: "Outreach sequence",
+          body: "Sheets trigger → Filter → 3-way Paths split by lead score → each path: Gmail → Slack → Delay → Gmail → Slack. A personalized cadence per tier.",
+        },
+        {
+          stage: "Zap 3 · 15 steps",
+          title: "Nurture follow-up",
+          body: "Sheets trigger → Filter → 3-way Paths → each path: nested Paths → Delay → Gmail → Slack. Re-engages leads that didn’t convert in the outreach pass.",
+        },
+      ],
+      proof: [
+        {
+          image: "/images/projects/crm-lead-intake.webp",
+          alt: "Zapier editor showing the 8-step Lead Intake Zap",
+          title: "Zap 1 — Lead Intake (8 steps)",
+          caption: "The Typeform entry is filtered, formatted, scored by AI, then written to the Google Sheets CRM and pushed to Trello as a deal card.",
+        },
+        {
+          image: "/images/projects/crm-outreach.webp",
+          alt: "Zapier editor showing the 21-step Outreach Sequence Zap with three score paths",
+          title: "Zap 2 — Outreach Sequence (21 steps)",
+          caption: "A new CRM row triggers a 3-path outreach split (Hot / Warm / Cold). Each path runs Gmail → Slack → Delay → Gmail → Slack so reps and prospects stay in lockstep.",
+        },
+        {
+          image: "/images/projects/crm-nurture.webp",
+          alt: "Zapier editor showing the 15-step Nurture Email Zap with nested paths",
+          title: "Zap 3 — Nurture Email (15 steps)",
+          caption: "Catches anyone who didn’t convert. Three nurture paths with nested conditions, delays, Gmail follow-ups and Slack pings keep the pipeline alive.",
+        },
+      ],
+    },
   },
   {
     id: 'job-poster-enrichment',
@@ -190,7 +329,59 @@ export const projects: Project[] = [
     ],
     image: '/images/projects/n8n-job-poster-enrichment.webp',
     imageAlt: 'n8n canvas showing the Job Poster Scraping & Enrichment workflow',
-    caseStudyLink: `${CASE}/n8n-job-poster-enrichment.html`,
+    caseStudy: {
+      howItWorks: [
+        {
+          stage: "Trigger",
+          title: "Slack search request",
+          body: "A recruiter posts a role and location in Slack. The Slack Trigger node picks up the message and starts the run.",
+        },
+        {
+          stage: "Validate",
+          title: "AI query check",
+          body: "Groq AI inspects the query for a usable job title and location. Vague requests short-circuit into an \"Invalid Query\" Slack reply.",
+        },
+        {
+          stage: "Scrape",
+          title: "Get all jobs via JSearch",
+          body: "An HTTP node calls the JSearch API; postings are split into items, limited to a working batch size, and de-duplicated against previous runs.",
+        },
+        {
+          stage: "Normalize",
+          title: "Code node clean-up",
+          body: "A JavaScript node standardizes company names, titles, locations and apply links so every branch shares one schema.",
+        },
+        {
+          stage: "Enrich",
+          title: "Decision-maker lookup",
+          body: "Each employer goes through Prospeo enrichment to resolve the hiring contact and a verified email. Success and error paths are handled separately.",
+        },
+        {
+          stage: "Log",
+          title: "Four Sheets branches",
+          body: "Enriched leads, un-enriched leads, skipped duplicates and failures each append to their own tab — a live prospecting CRM with a full audit trail.",
+        },
+        {
+          stage: "Write",
+          title: "AI outreach email",
+          body: "A Groq AI node drafts a personalized pitch referencing the exact role, company and location.",
+        },
+        {
+          stage: "Deliver",
+          title: "Gmail draft + Slack recap",
+          body: "The message is saved as a Gmail draft for a human to approve, and Slack gets a summary of the new leads.",
+        },
+      ],
+      proof: [
+        {
+          image: "/images/projects/n8n-job-poster-enrichment.webp",
+          alt: "n8n canvas showing the Job Poster Scraping & Enrichment workflow",
+          title: "n8n workflow — full build",
+          caption: "Slack intake, AI query validation, JSearch scraping, de-duplication, Prospeo enrichment, four Google Sheets branches, AI-written outreach, Gmail draft and Slack notification.",
+          points: ["Slack Trigger → Check Query (Groq) → If valid, else \"Invalid Query\" reply", "Get All Jobs (JSearch) → Split Out → Limit → Remove Duplicates → Code", "Prospeo enrichment → If → Append row (success / fallback / skipped)", "AI outreach (Groq) → Code → Gmail draft → Slack message"],
+        },
+      ],
+    },
   },
   {
     id: 'ai-customer-support',
@@ -217,7 +408,49 @@ export const projects: Project[] = [
     ],
     image: '/images/projects/n8n-ai-customer-support.webp',
     imageAlt: 'n8n canvas showing the AI Customer Support workflow with a six-branch switch',
-    caseStudyLink: `${CASE}/n8n-ai-customer-support.html`,
+    caseStudy: {
+      howItWorks: [
+        {
+          stage: "Ingest",
+          title: "Webhook ticket receipt",
+          body: "A webhook receives the ticket from any source — form, email or chat — and immediately responds to acknowledge receipt.",
+        },
+        {
+          stage: "Classify",
+          title: "AI category detection",
+          body: "Groq AI classifies the ticket as Billing, Technical, Shipping, Refunds, Complaint or General.",
+        },
+        {
+          stage: "Lookup",
+          title: "Knowledge base search",
+          body: "The workflow queries an internal knowledge base for the most relevant answer or policy before composing a response.",
+        },
+        {
+          stage: "Route",
+          title: "Smart branch routing",
+          body: "A Switch node sends each ticket down the branch for its category — complaints get escalated instantly.",
+        },
+        {
+          stage: "Respond",
+          title: "Personalized AI reply",
+          body: "Each branch runs its own Groq AI node to craft a context-aware, empathetic response using the KB answer and customer details.",
+        },
+        {
+          stage: "Deliver",
+          title: "Log, email & notify",
+          body: "Appends the ticket to Google Sheets, emails the response, and pings the team on Slack. Complaints trigger an instant escalation.",
+        },
+      ],
+      proof: [
+        {
+          image: "/images/projects/n8n-ai-customer-support.webp",
+          alt: "n8n canvas showing the AI Customer Support workflow with a six-branch switch",
+          title: "n8n workflow — full build",
+          caption: "Ingestion, AI classification, KB lookup, multi-branch routing, personalized responses, logging, email delivery, Slack notifications and complaint escalation, on free Groq AI.",
+          points: ["Webhook → Respond to Webhook → AI Classify (Groq) → Extract Category", "KB Lookup → Switch with 6 branches → branch-specific AI Response nodes", "Code node → Append/update Google Sheet → Send email → Slack alert", "Complaint branch triggers a dedicated escalation message"],
+        },
+      ],
+    },
   },
   {
     id: 'ai-job-scraper',
@@ -244,7 +477,49 @@ export const projects: Project[] = [
     ],
     image: '/images/projects/n8n-job-scraper.webp',
     imageAlt: 'n8n canvas showing the AI Job Scraper and Resume Optimizer workflow',
-    caseStudyLink: `${CASE}/n8n-job-scraper.html`,
+    caseStudy: {
+      howItWorks: [
+        {
+          stage: "Trigger",
+          title: "Scheduled job pull",
+          body: "A cron-scheduled trigger fires the workflow automatically — no manual start.",
+        },
+        {
+          stage: "Search",
+          title: "JSearch API scrape",
+          body: "Fetches live job listings from LinkedIn and Indeed via the JSearch API with a targeted query.",
+        },
+        {
+          stage: "Validate",
+          title: "Check & split results",
+          body: "Validates the API response, then splits each listing into its own item.",
+        },
+        {
+          stage: "Read",
+          title: "Pull base resume",
+          body: "Retrieves the master resume from Google Drive as the foundation for tailoring.",
+        },
+        {
+          stage: "AI",
+          title: "Compare & rewrite",
+          body: "The AI node scores the job against the resume, then rewrites a role-specific version for that job’s keywords and requirements.",
+        },
+        {
+          stage: "Deliver",
+          title: "Drive + Slack",
+          body: "Saves the tailored resume to Google Drive and sends a Slack alert with job title, company, match score and resume link.",
+        },
+      ],
+      proof: [
+        {
+          image: "/images/projects/n8n-job-scraper.webp",
+          alt: "n8n canvas showing the AI Job Scraper and Resume Optimizer workflow",
+          title: "n8n workflow — full build",
+          caption: "Job scraping, AI resume tailoring, cloud storage and notifications. Every node is wired, configured and tested.",
+          points: ["Scheduled trigger → JSearch API → result validation → item split", "Per-job loop: resume fetch → AI compare & rewrite → structured output parsing", "Conditional save to Google Drive + Slack alert with match score and link", "Invalid-query branch handles edge cases without breaking the flow"],
+        },
+      ],
+    },
   },
   {
     id: 'ai-content-generator',
@@ -273,7 +548,49 @@ export const projects: Project[] = [
     ],
     image: '/images/projects/n8n-ai-content-generator.webp',
     imageAlt: 'n8n canvas showing the 20-node AI Content Generator with five parallel AI branches',
-    caseStudyLink: `${CASE}/n8n-ai-content-generator.html`,
+    caseStudy: {
+      howItWorks: [
+        {
+          stage: "Trigger",
+          title: "Webhook topic submit",
+          body: "Submit a single topic via webhook — the workflow responds with confirmation and starts processing.",
+        },
+        {
+          stage: "Format",
+          title: "Input normalization",
+          body: "Cleans the topic and structures it for consistent prompts across all five channels.",
+        },
+        {
+          stage: "AI Generation",
+          title: "5 parallel Groq calls",
+          body: "One topic fans out into five platform-specific pieces at once — blog, Instagram, LinkedIn, X and newsletter — each tuned to channel voice and length.",
+        },
+        {
+          stage: "Merge & Code",
+          title: "Aggregate & transform",
+          body: "All AI outputs merge into one payload, and a JavaScript node reformats it before delivery.",
+        },
+        {
+          stage: "Publish & Log",
+          title: "Notion + Sheets",
+          body: "Content is published as a Notion database page for editorial tracking and appended to Google Sheets for reporting.",
+        },
+        {
+          stage: "Deliver & Notify",
+          title: "Gmail + Slack",
+          body: "The newsletter goes out via Gmail and the team is alerted on Slack. A conditional branch triggers a review flow if approval is needed.",
+        },
+      ],
+      proof: [
+        {
+          image: "/images/projects/n8n-ai-content-generator.webp",
+          alt: "n8n canvas showing the 20-node AI Content Generator with five parallel AI branches",
+          title: "20-node n8n workflow, 5 parallel AI branches",
+          caption: "Webhook → respond → format → 5 concurrent Groq nodes → merge → JavaScript → Notion → Google Sheets → Gmail → Slack → conditional review branch.",
+          points: ["5 parallel AI content calls via Groq", "8 integrated apps: Webhook, Groq, JavaScript, Notion, Google Sheets, Gmail, Slack, If", "Review branch: flagged posts go to a Gmail + Slack review queue", "One webhook → full multi-channel pipeline in under 30 seconds"],
+        },
+      ],
+    },
   },
   {
     id: 'ai-feedback-analyzer',
@@ -301,7 +618,56 @@ export const projects: Project[] = [
     ],
     image: '/images/projects/make-ai-feedback-main.webp',
     imageAlt: 'Make.com scenario showing webhook, OpenAI, router and three delivery branches',
-    caseStudyLink: `${CASE}/make-ai-feedback-analyzer.html`,
+    caseStudy: {
+      howItWorks: [
+        {
+          stage: "Trigger",
+          title: "Feedback webhook",
+          body: "A Make custom webhook receives the form payload and responds immediately, so the form never hangs.",
+        },
+        {
+          stage: "AI Analysis",
+          title: "OpenAI sentiment",
+          body: "An HTTP call to /v1/chat/completions asks OpenAI to classify the feedback as Positive, Neutral or Negative with a short reason.",
+        },
+        {
+          stage: "Route",
+          title: "3-way router",
+          body: "A Set variable module normalizes the label, then Make’s Router fans out into three deterministic branches.",
+        },
+        {
+          stage: "Positive path",
+          title: "Amplify to social",
+          body: "Row appended to Sheets, thank-you email via Gmail, Slack ping, and a status update queued to Buffer.",
+        },
+        {
+          stage: "Negative path",
+          title: "Escalate to support",
+          body: "Row logged as \"open\", apology and owner assignment by Gmail, and an urgent Slack alert in the support channel.",
+        },
+        {
+          stage: "SLA watchdog",
+          title: "24h re-alert every 2 hours",
+          body: "A companion scenario searches Sheets every 2 hours for negative tickets open past 24 hours and pushes a \"RESOLVE NOW\" Slack alert.",
+        },
+      ],
+      proof: [
+        {
+          image: "/images/projects/make-ai-feedback-main.webp",
+          alt: "Make.com scenario: webhook, OpenAI, router and three delivery branches",
+          title: "Main scenario — webhook → AI → router → 3 branches",
+          caption: "Each branch logs to Google Sheets, sends a Gmail reply and posts to Slack; the positive branch also queues a Buffer social update.",
+          points: ["Customers get instant confirmation; the back office runs asynchronously", "OpenAI classification in a single HTTP module — swap models without touching the rest", "Every submission ends up in exactly one path"],
+        },
+        {
+          image: "/images/projects/make-ai-feedback-escalation.webp",
+          alt: "Make.com watchdog scenario: Sheets search, if-else, Slack escalation or digest",
+          title: "SLA watchdog — every 2 hours",
+          caption: "Searches Sheets for negative rows still \"open\". If a ticket is older than 24 hours it fires a \"RESOLVE NOW\" alert; otherwise it posts a lightweight digest.",
+          points: ["Fixed 2-hour cadence: predictable load", "Reads the same Sheet the main scenario writes to", "Change the SLA window without touching the intake scenario"],
+        },
+      ],
+    },
   },
 
   // ─────────────────────── Web apps & landing pages ───────────────────────

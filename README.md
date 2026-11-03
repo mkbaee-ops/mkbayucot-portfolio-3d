@@ -50,13 +50,16 @@ All projects live in **`src/data/projects.ts`**. Add an object to the `projects`
   ],
   image: '/images/projects/lead-router.webp',   // put the file in public/images/projects/
   imageAlt: 'n8n canvas showing the AI Lead Router workflow',
-  caseStudyLink: 'https://…',              // optional
+  caseStudy: {                             // optional: adds a "Read the case study" pop-up
+    howItWorks: [{ stage: 'Trigger', title: 'Webhook intake', body: '…' }],
+    proof: [{ image: '/images/projects/lead-router.webp', alt: '…', title: '…', caption: '…', points: ['…'] }],
+  },
   liveLink: null,
   githubLink: null,
 }
 ```
 
-`kind` sets the node color and icon: `trigger`, `logic`, `ai`, `router`, `data`, `action`, `notify`, `schedule`. `branches` draws small satellite nodes that fan out below a step.
+`kind` sets the node color and icon: `trigger`, `logic`, `ai`, `router`, `data`, `action`, `notify`, `schedule`. `branches` draws small satellite nodes that fan out below a step. A project's case study also has a shareable link: `/#cs-<project id>` opens it directly.
 
 **Web app / landing page** (goes to the laptop-mockup cards):
 
