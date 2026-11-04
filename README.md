@@ -82,6 +82,10 @@ Delete the two `placeholder: true` entries once you have real web projects.
 
 Personal info, services, experience and the tech-stack list live in **`src/data/profile.ts`**.
 
+## How AI tools read this site
+
+Most AI crawlers don't run JavaScript. At build time, `scripts/crawlable.mjs` writes the data files into `index.html` as plain HTML and JSON-LD, and generates `/llms.txt` and `/sitemap.xml`. It runs automatically, so new projects are included. Roles and availability are set at the top of that script.
+
 ## How the 3D is kept fast
 
 - **Three quality tiers** (`src/lib/device.ts`):

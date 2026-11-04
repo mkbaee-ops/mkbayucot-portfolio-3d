@@ -79,7 +79,7 @@ export const projects: Project[] = [
     ],
     liveLink: null,
     githubLink: null,
-    repoNote: 'Private client repo',
+    repoNote: 'Private client code',
     deepDive: 'lead-engine',
   },
   {

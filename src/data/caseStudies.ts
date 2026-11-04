@@ -53,7 +53,7 @@ export const caseStudies: CaseStudy[] = [
     ],
     resultNote:
       'Daily runs before and after the fix (Oct 23 vs Oct 26, 2026). Latest run: 2,339 postings → 265 companies → 97 researched → 39 qualified leads and 17 verified emails.',
-    repo: { note: 'Private client repo. Code walkthrough available on request.' },
+    repo: { note: 'Private client code. Code walkthrough available on request.' },
   },
   {
     id: 'talent-app',

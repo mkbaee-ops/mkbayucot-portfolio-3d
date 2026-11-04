@@ -22,7 +22,7 @@ export const profile = {
     'AI lead scoring, support bots and content pipelines in n8n, Zapier and Make, plus full-stack web apps built with Claude Code, Supabase and Vercel.',
 
   // Bio adapted from the current portfolio
-  bio: "I'm an AI Automation Specialist building workflows and apps that replace manual operations with systems that scale. I design end-to-end automations in n8n, Zapier and Make (plus GoHighLevel for CRM work), from lead capture and CRM nurture to AI-powered content pipelines and support triage, and I document every build so clients can run it themselves.",
+  bio: "I'm an AI Automation Specialist building workflows and apps that replace manual operations with systems that scale. I design end-to-end automations in n8n, Zapier and Make, from lead capture and CRM nurture to AI-powered content pipelines and support triage, and I document every build so clients can run it themselves.",
 
   nowBuilding:
     'Next step: AI Engineer. Alongside automation work I now build landing pages and full-stack web apps with Claude Code, GitHub, Supabase and Vercel, taking the same systems thinking from no-code workflows into production code.',
@@ -123,7 +123,7 @@ export const experience: Experience[] = [
       },
       {
         lead: 'Integrations & APIs',
-        text: 'Connect GoHighLevel, Google Sheets and Airtable through webhooks and custom API steps, replacing fragile manual hand-offs with real-time data sync.',
+        text: 'Connect CRMs, Google Sheets and Airtable through webhooks and custom API steps, replacing fragile manual hand-offs with real-time data sync.',
       },
       {
         lead: 'Funnels that convert',
@@ -134,7 +134,7 @@ export const experience: Experience[] = [
         text: 'Diagnose and rebuild broken workflows, triggers and filters and monitor them in production, then document every build with step-by-step maps and train clients to self-manage.',
       },
     ],
-    tools: ['Claude Code', 'Zapier', 'n8n', 'Make', 'GitHub', 'Supabase', 'Vercel', 'OpenAI', 'Groq', 'GoHighLevel', 'Google Sheets', 'Airtable'],
+    tools: ['Claude Code', 'Zapier', 'n8n', 'Make', 'GitHub', 'Supabase', 'Vercel', 'OpenAI', 'Groq', 'Google Sheets', 'Airtable'],
   },
   {
     role: 'Secretariat Staff',
@@ -170,7 +170,6 @@ export const stack: { name: string; icon?: string; core?: boolean }[] = [
   { name: 'Vercel', icon: '/icons/vercel.svg', core: true },
   { name: 'GitHub', icon: '/icons/github.svg', core: true },
   { name: 'Groq', icon: '/icons/groq.svg' },
-  { name: 'GoHighLevel', icon: '/icons/crm.svg' },
   { name: 'HubSpot', icon: '/icons/hubspot.svg' },
   { name: 'ActiveCampaign', icon: '/icons/crm.svg' },
   { name: 'Airtable', icon: '/icons/airtable.svg' },
